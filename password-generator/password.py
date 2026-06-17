@@ -37,16 +37,19 @@ def generate_password(length, use_numbers, use_symbol, use_uppercase, use_lowerc
     random.shuffle(password)
     return "".join(password)
 def main():
-    try:
-        length = int(input("what is the lengthof password: "))
-    except ValueError:
-        print("Error: enter a number")
-        return None
-    use_numbers = input("include numbers (y/n)? ")
-    use_symbols = input("include symbols(y/n)? ")
-    use_uppercase = input("include uppercase? (y/n): ")
-    use_lowercase = input("include lowercase? (y/n): ")
-    
+    while True:
+        try:
+            length = int(input("what is the length of password: "))
+            if length < 1:
+                print("you should input integer and atleast 1 length of password")
+                continue
+            break
+        except ValueError:
+            print("Invalid input: please enter a whole number")   
+    use_numbers = input("include numbers (y/n)? ").strip().lower()
+    use_symbols = input("include symbols(y/n)? ").strip().lower()
+    use_uppercase = input("include uppercase? (y/n): ").strip().lower()
+    use_lowercase = input("include lowercase? (y/n): ").strip().lower()
     password = generate_password(length, use_numbers, use_symbols,use_uppercase, use_lowercase)
     if password:
         print(password)
